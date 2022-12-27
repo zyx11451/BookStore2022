@@ -5,4 +5,12 @@
 #ifndef MAIN_CPP_LOG_H
 #define MAIN_CPP_LOG_H
 
+void log_add();
+
+void log_show();
+
+void log_show(int count);
+
+void log_show_all();
+
 #endif //MAIN_CPP_LOG_H
