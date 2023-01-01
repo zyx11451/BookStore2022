@@ -66,12 +66,42 @@ void block<T>::block_delete(T a) {
 template<class T>
 block_linklist<T>::block_linklist() {
     length = 0;
+    file_name="test";
     main_data.open("test");
     block<T> head;
     if (!main_data) {
         main_data.open("test", std::ios::out);
         main_data.close();
         main_data.open("test");
+        head.next_pos = -1;
+        main_data.seekp(0);
+        main_data.write(reinterpret_cast<char *>(&head), sizeof(head));
+        last = 0;
+        length = 1;
+        block_amount = 0;//块位置的最大值
+    }else{
+        length=0;
+        block_amount=0;
+        block<T> cur;
+        for(int i=0;i!=-1;i=cur.next_pos){
+            read_block(i,cur);
+            if(cur.next_pos==-1) last=i;
+            if(cur.next_pos>block_amount) block_amount=cur.next_pos;
+            length++;
+        }
+    }
+}
+
+template<class T>
+block_linklist<T>::block_linklist(std::string a) {
+    length = 0;
+    file_name=a;
+    main_data.open(file_name);
+    block<T> head;
+    if (!main_data) {
+        main_data.open(file_name, std::ios::out);
+        main_data.close();
+        main_data.open(file_name);
         head.next_pos = -1;
         main_data.seekp(0);
         main_data.write(reinterpret_cast<char *>(&head), sizeof(head));

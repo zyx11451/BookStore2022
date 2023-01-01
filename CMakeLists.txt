@@ -5,4 +5,5 @@ add_executable(code main.cpp
         log.cpp
         readandwrite.cpp
         user.cpp
-        book.cpp)
+        book.cpp
+        error.cpp)

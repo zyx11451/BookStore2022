@@ -8,20 +8,80 @@
 #include <string>
 #include <set>
 #include "user.h"
+class ISBN{
+private:
+    char a[21];
+public:
+    ISBN();
 
+    ISBN(std::string);
+
+    ~ISBN()=default;
+
+    bool operator==(const ISBN &b);
+
+    bool operator!=(const ISBN &b);
+
+    bool operator>=(const ISBN &b);
+
+    bool operator>(const ISBN &b);
+
+    bool operator<=(const ISBN &b);
+
+    bool operator<(const ISBN &b);
+
+    ISBN &operator=(const ISBN &b);
+};
+class my_string{
+public:
+    char a[61];
+    my_string();
+
+    my_string(std::string);
+
+    ~my_string()=default;
+
+    bool operator==(const my_string &b);
+
+    bool operator!=(const my_string &b);
+
+    bool operator>=(const my_string &b);
+
+    bool operator>(const my_string &b);
+
+    bool operator<=(const my_string &b);
+
+    bool operator<(const my_string &b);
+
+    my_string &operator=(const my_string &b);
+};
 class Book {
 private:
-    std::string book_name;
-    std::string author;
-    std::string isbn;
-    std::string key_word;
+    my_string book_name;
+    my_string author;
+    ISBN isbn;
+    my_string key_word[30];
     int quantity;
     double price;
 public:
-    Book();
+    Book(std::string book_name_,
+         std::string author_,
+         std::string isbn_,
+         std::string keyword_,
+         int quantity_,
+         double price_);
     friend user;
+    bool operator==(const Book &b);
 
+    bool operator!=(const Book &b);
+
+    bool operator>=(const Book &b);
+
+    bool operator>(const Book &b);
+
+    bool operator<=(const Book &b);
+
+    bool operator<(const Book &b);
 };
 
-std::set<std::string> ISBN;
 #endif //MAIN_CPP_BOOK_H

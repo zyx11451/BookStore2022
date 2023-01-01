@@ -7,67 +7,80 @@
 
 #include<string>
 #include <set>
+#include "book.h"
+#include "readandwrite.h"
+
+
+
+
+class password_type {
+public:
+    char a[31];
+
+    password_type();
+
+    password_type(std::string);
+
+    ~password_type() = default;
+
+    password_type &operator=(const password_type &b);
+
+    bool operator==(const password_type &b);
+};
+class name_type {
+public:
+    char a[31];
+
+    name_type();
+
+    name_type(std::string);
+
+    ~name_type()=default;
+
+    name_type &operator=(const name_type &b);
+};
 
 class user {
 private:
-    int user_id;
-    std::string password;
-    std::string name;
+    password_type user_id;
+    password_type password;
+    name_type name;
     int privilege;
 public:
     user();
 
-    ~user();
+    user(std::string user_id_,std::string password_,std::string name_,int privilege_);
 
-    virtual void log_in(int user_id);
+    ~user() = default;
 
-    virtual void log_out(int user_id);
+    void log_in(password_type user_id);
 
-    virtual void change_password(int user_id);
+    void log_in(password_type user_id,password_type password);
 
-    virtual void delete_user(int user_id);
-
-    virtual void add_user();
-
-    virtual void user_register();
-
-    virtual void buy(std::string, int);
-
-    virtual void show();
-
-    virtual void select(std::string);
-
-    virtual void book_modify(std::string);
-
-    virtual void book_import(int quantity, double total_cost);
-};
-
-class owner : public user {
-public:
-    void log_in(int user_id);
+    void log_out(int user_id);
 
     void change_password(int user_id);
 
     void delete_user(int user_id);
 
     void add_user();
+
+    void user_register();
+
+    void buy(std::string, int);
+
+    void show();
+
+    void select(std::string);
+
+    void book_modify(std::string);
+
+    void book_import(int quantity, double total_cost);
+
+    bool operator<(const user &b);
 };
-
-class assistant : public user {
-public:
-    void add_user();
+struct selection{
+    password_type now_user_id;
+    ISBN now_book;
 };
-
-class visitor : public user {
-public:
-    void log_in(int user_id);
-
-    virtual void log_out(int user_id);
-
-    virtual void change_password(int user_id);
-
-    virtual void user_register();
-};
-
-std::set<std::string> user_name;
 #endif //MAIN_CPP_USER_H

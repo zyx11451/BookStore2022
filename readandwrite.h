@@ -49,7 +49,10 @@ public:
     int last;
     std::fstream main_data;
     const int end_pos = -1;
+    std::string file_name;
     block_linklist();
+
+    block_linklist(std::string);
 
     ~block_linklist() = default;
 
